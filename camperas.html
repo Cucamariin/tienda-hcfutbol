@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camperas | HC Futbol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            background: #F2E8CF; 
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        /* --- 1. BARRA LOGO --- */
+        .top-bar-logo {
+            background: #F2E8CF;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #e0d8c3;
+        }
+        .top-bar-logo h1 { 
+            margin: 0; 
+            font-size: 2.2rem; 
+            color: #2E8B57; 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- 2. HEADER/NAV --- */
+        header { 
+            background: #2E8B57; 
+            color: white; 
+            padding: 10px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+
+        .main-nav { display: flex; gap: 20px; align-items: center; }
+        .main-nav a {
+            color: white; text-decoration: none; font-weight: bold;
+            font-size: 0.9rem; text-transform: uppercase; transition: 0.3s;
+        }
+        .main-nav a:hover { color: #F2E8CF; }
+
+        .dropdown { position: relative; display: inline-block; }
+        .dropbtn { 
+            background: transparent; color: white; border: none; 
+            cursor: pointer; font-weight: bold; font-size: 0.9rem;
+            font-family: 'Roboto', sans-serif; text-transform: uppercase;
+        }
+        .dropdown-content {
+            display: none; position: absolute; left: 0; 
+            background: white; min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1000; border-radius: 8px; overflow: hidden;
+            margin-top: 10px;
+        }
+        .dropdown-content a {
+            color: #333; padding: 12px 20px; text-decoration: none;
+            display: block; border-bottom: 1px solid #eee; text-transform: none;
+        }
+        .dropdown-content a:hover { background: #F2E8CF; }
+        
+        .dropdown.active .dropdown-content { display: block; }
+
+        .btn-carrito-nav {
+            background: #e67e22; color: white; border: none;
+            padding: 10px 20px; border-radius: 50px;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+
+        /* --- PRODUCTOS --- */
+        .seccion-titulo { text-align: center; padding: 40px 0 20px; font-size: 2.2rem; color: #2E8B57; text-transform: uppercase; }
+        .container { 
+            max-width: 1200px; margin: auto; padding: 20px; 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; 
+        }
+        .producto { 
+            background: white; padding: 25px; border-radius: 20px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;
+            position: relative;
+        }
+        .producto:hover { transform: translateY(-10px); }
+        .producto img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+
+        .badge-oferta {
+            position: absolute; top: 10px; right: 10px;
+            background: #e74c3c; color: white; padding: 5px 12px;
+            border-radius: 50px; font-size: 0.8rem; font-weight: bold;
+            z-index: 10;
+        }
+        
+        .select-talle {
+            width: 100%; padding: 12px; margin: 15px 0;
+            border-radius: 10px; border: 2px solid #2E8B57;
+            font-weight: bold; cursor: pointer; background-color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn-accion {
+            padding: 15px; border-radius: 10px; cursor: pointer;
+            width: 100%; font-weight: bold; text-transform: uppercase;
+            border: none; transition: 0.3s; margin-bottom: 10px;
+            font-size: 0.85rem; letter-spacing: 1px;
+        }
+        .btn-ver-producto { background: #1E5D3D; color: white; }
+        .btn-ver-producto:hover { background: #2E8B57; }
+        .btn-agregar-carrito { background: #333; color: white; }
+        .btn-agregar-carrito:hover { background: #000; }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            background-color: white; margin: 5% auto; padding: 25px;
+            border-radius: 15px; width: 90%; max-width: 450px; text-align: center; position: relative;
+        }
+        .cerrar-modal { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
+        .modal-img { width: 100%; border-radius: 10px; margin: 15px 0; }
+
+        footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<div class="top-bar-logo">
+    <h1>HC Futbol</h1>
+</div>
+
+<header>
+    <nav class="main-nav">
+        <a href="TIENDAOFICIAL.html">Inicio</a>
+        <div class="dropdown" id="dropdownCategorias">
+            <button class="dropbtn" onclick="toggleDropdown(event)">Categorías ▼</button>
+            <div class="dropdown-content">
+                <a href="camisetas-importadas.html">Camisetas Importadas</a>
+                <a href="camisetas-nacionales.html">Camisetas Nacionales</a>
+                <a href="camisetas-ninos.html">Camisetas De Niño</a>
+                <a href="shorts.html">Shorts</a>
+                <a href="buzos.html">Buzos</a>
+                <a href="camperas.html">Camperas</a>
+                <a href="conjuntos.html">Conjuntos</a>
+            </div>
+        </div>
+        <a href="ofertas.html">Ofertas</a>
+    </nav>
+    <button class="btn-carrito-nav" onclick="enviarPedido()">
+        🛒 Carrito (<span id="contador-carrito">0</span>)
+    </button>
+</header>
+
+<h2 class="seccion-titulo">🧥 Camperas</h2>
+
+<div class="container" id="lista-productos">
+</div>
+
+<div id="miModal" class="modal">
+    <div class="modal-content">
+        <span class="cerrar-modal" onclick="cerrarDetalles()">&times;</span>
+        <h2 id="modal-titulo"></h2>
+        <img id="modal-img" src="" class="modal-img">
+        <p><strong>Precio:</strong> <span id="modal-precio"></span></p>
+        <p style="color: #666; font-size: 0.9rem;">Prendas de alta gama para protegerte del frío con el escudo de tu pasión.</p>
+        <button class="btn-accion btn-agregar-carrito" id="btn-modal-agregar">Añadir al Carrito</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 HC Futbol - Calidad Premium</p>
+</footer>
+
+<script>
+    const productos = [
+        { id: 601, nombre: "Campera Adulto Boca Jrs Amarilla", precio: 25000, img: "campera-boca-amarilla.jpg", oferta: true, stock: { S:false, M:true, L:true, XL:false, XXL:false } },
+        { id: 602, nombre: "Campera Adulto Inter de Miami Blanca", precio: 32000, img: "campera-miami-blanca.jpg", oferta: true, stock: { S:false, M:false, L:false, XL:false, XXL:true } },
+        { id: 603, nombre: "Campera Adulto Inter de Miami Manga Gris", precio: 32000, img: "campera-miami-gris.jpg", oferta: true, stock: { S:false, M:true, L:false, XL:false, XXL:false } },
+        { id: 604, nombre: "Campera Adulto Inter de Miami Negra", precio: 32000, img: "campera-miami-negra.jpg", oferta: true, stock: { S:false, M:false, L:false, XL:true, XXL:false } },
+        { id: 605, nombre: "Campera Adulto AFA Negra 2025", precio: 40000, img: "campera-afa-negra.jpg", oferta: false, stock: { S:false, M:true, L:true, XL:false, XXL:false } },
+        { id: 606, nombre: "Campera Rompe Viento River Plate", precio: 20000, img: "rompeviento-river.jpg", oferta: true, stock: { S:true, M:true, L:true, XL:false, XXL:false } }
+    ];
+
+    let carrito = [];
+
+    function toggleDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('dropdownCategorias');
+        dropdown.classList.toggle('active');
+    }
+
+    function cargarProductos() {
+        const contenedor = document.getElementById('lista-productos');
+        contenedor.innerHTML = '';
+        productos.forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'producto';
+            
+            let htmlOferta = p.oferta ? `<div class="badge-oferta">OFERTA</div>` : '';
+            
+            let opcionesTalles = `<option value="">Elegir Talle</option>`;
+            for (const [talle, disponible] of Object.entries(p.stock)) {
+                opcionesTalles += `<option value="${talle}" ${disponible ? '' : 'disabled'}>${talle} ${disponible ? '' : '(Agotado)'}</option>`;
+            }
+
+            div.innerHTML = `
+                ${htmlOferta}
+                <img src="${p.img}" alt="${p.nombre}">
+                <h3>${p.nombre}</h3>
+                <p style="color:#2E8B57; font-size:1.5rem; font-weight:900">$${p.precio.toLocaleString()}</p>
+                <select class="select-talle" id="talle-${p.id}">${opcionesTalles}</select>
+                <button class="btn-accion btn-ver-producto" onclick="verProducto('${p.nombre}', ${p.precio}, '${p.img}')">Ver Producto</button>
+                <button class="btn-accion btn-agregar-carrito" onclick="agregarAlCarrito(${p.id})">Añadir al Carrito</button>
+            `;
+            contenedor.appendChild(div);
+        });
+    }
+
+    function actualizarContador() {
+        document.getElementById('contador-carrito').innerText = carrito.length;
+    }
+
+    function agregarAlCarrito(id) {
+        const producto = productos.find(p => p.id === id);
+        const talle = document.getElementById(`talle-${id}`).value;
+        if (!talle) { alert("Por favor, seleccioná un talle."); return; }
+        
+        carrito.push({ nombre: producto.nombre, precio: producto.precio, talle: talle });
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        actualizarContador();
+        alert(`¡Agregaste ${producto.nombre} talle ${talle}!`);
+    }
+
+    function verProducto(nombre, precio, img) {
+        document.getElementById('modal-titulo').innerText = nombre;
+        document.getElementById('modal-precio').innerText = "$" + precio.toLocaleString();
+        document.getElementById('modal-img').src = img;
+        document.getElementById('miModal').style.display = "block";
+    }
+
+    function cerrarDetalles() { document.getElementById('miModal').style.display = "none"; }
+
+    function enviarPedido() {
+        if (carrito.length === 0) { alert("Tu carrito está vacío."); return; }
+        let msj = "Hola HC Futbol! Quiero realizar este pedido de Camperas:%0A%0A";
+        let total = 0;
+        carrito.forEach((i, idx) => {
+            msj += `${idx + 1}. ${i.nombre} - *Talle: ${i.talle}* ($${i.precio.toLocaleString()})%0A`;
+            total += i.precio;
+        });
+        msj += `%0A*TOTAL A PAGAR: $${total.toLocaleString()}*`;
+
+        // Limpiar carrito tras realizar pedido
+        localStorage.removeItem('carrito');
+        carrito = [];
+        actualizarContador();
+
+        window.open(`https://wa.me/543584237914?text=${msj}`, '_blank');
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('miModal')) cerrarDetalles();
+        const dropdown = document.getElementById('dropdownCategorias');
+        if (!event.target.matches('.dropbtn')) {
+            dropdown.classList.remove('active');
+        }
+    }
+
+    window.onload = function() {
+        const carritoGuardado = localStorage.getItem('carrito');
+        if (carritoGuardado) {
+            carrito = JSON.parse(carritoGuardado);
+            actualizarContador();
+        }
+        cargarProductos();
+    };
+</script>
+</body>
+</html>
