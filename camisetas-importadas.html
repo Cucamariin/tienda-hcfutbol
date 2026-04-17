@@ -170,8 +170,7 @@
 
 <h2 class="seccion-titulo">🌍 Catálogo Calidad Importada</h2>
 
-<div class="container" id="lista-productos">
-</div>
+<div class="container" id="lista-productos"></div>
 
 <div id="miModal" class="modal">
     <div class="modal-content">
@@ -267,10 +266,7 @@
         if (!talle) { alert("Por favor, seleccioná un talle."); return; }
         
         carrito.push({ nombre: producto.nombre, precio: producto.precio, talle: talle });
-        
-        // Persistencia
         localStorage.setItem('carrito', JSON.stringify(carrito));
-        
         actualizarContador();
         alert(`¡Agregaste ${producto.nombre} talle ${talle}!`);
     }
@@ -298,7 +294,6 @@
         });
         msj += `%0A*TOTAL A PAGAR: $${total.toLocaleString()}*`;
         
-        // Limpieza de carrito al enviar
         localStorage.removeItem('carrito');
         carrito = [];
         actualizarContador();
@@ -314,7 +309,6 @@
         }
     }
 
-    // Al cargar: recuperar datos y renderizar
     window.onload = function() {
         const carritoGuardado = localStorage.getItem('carrito');
         if (carritoGuardado) {
