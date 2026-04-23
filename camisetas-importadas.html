@@ -5,140 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Importadas | HC Futbol</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap" rel="stylesheet">
-    
     <style>
-        body { 
-            font-family: 'Roboto', sans-serif; 
-            margin: 0; 
-            background: #F2E8CF; 
-            color: #333;
-            scroll-behavior: smooth;
-        }
+    body { 
+        font-family: 'Roboto', sans-serif; 
+        margin: 0; 
+        background: #F2E8CF; 
+        color: #333;
+        scroll-behavior: smooth;
+    }
 
-        /* --- 1. BARRA LOGO --- */
-        .top-bar-logo {
-            background: #F2E8CF;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 1px solid #e0d8c3;
-        }
-        .top-bar-logo h1 { 
-            margin: 0; 
-            font-size: 2.2rem; 
-            color: #2E8B57; 
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+    /* --- 1. BARRA LOGO --- */
+    .top-bar-logo {
+        background: #F2E8CF;
+        padding: 15px 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid #e0d8c3;
+    }
+    .top-bar-logo h1 { 
+        margin: 0; 
+        font-size: 2.2rem; 
+        color: #2E8B57; 
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
 
-        /* --- 2. HEADER/NAV --- */
-        header { 
-            background: #2E8B57; 
-            color: white; 
-            padding: 10px 5%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1001;
-        }
+    /* --- 2. HEADER/NAV --- */
+    header { 
+        background: #2E8B57; 
+        color: white; 
+        padding: 10px 5%; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1001;
+    }
 
-        .main-nav { display: flex; gap: 20px; align-items: center; }
-        .main-nav a {
-            color: white; text-decoration: none; font-weight: bold;
-            font-size: 0.9rem; text-transform: uppercase; transition: 0.3s;
-        }
-        .main-nav a:hover { color: #F2E8CF; }
+    .main-nav { display: flex; gap: 20px; align-items: center; }
+    .main-nav a {
+        color: white; text-decoration: none; font-weight: bold;
+        font-size: 0.9rem; text-transform: uppercase; transition: 0.3s;
+    }
+    .main-nav a:hover { color: #F2E8CF; }
 
-        .dropdown { position: relative; display: inline-block; }
-        .dropbtn { 
-            background: transparent; color: white; border: none; 
-            cursor: pointer; font-weight: bold; font-size: 0.9rem;
-            font-family: 'Roboto', sans-serif; text-transform: uppercase;
-        }
-        .dropdown-content {
-            display: none; position: absolute; left: 0; 
-            background: white; min-width: 220px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 1000; border-radius: 8px; overflow: hidden;
-            margin-top: 10px;
-        }
-        .dropdown-content a {
-            color: #333; padding: 12px 20px; text-decoration: none;
-            display: block; border-bottom: 1px solid #eee; text-transform: none;
-        }
-        .dropdown-content a:hover { background: #F2E8CF; }
-        
-        .dropdown:hover .dropdown-content,
-        .dropdown.active .dropdown-content { display: block; }
+    .dropdown { position: relative; display: inline-block; }
+    .dropbtn { 
+        background: transparent; color: white; border: none; 
+        cursor: pointer; font-weight: bold; font-size: 0.9rem;
+        font-family: 'Roboto', sans-serif; text-transform: uppercase;
+    }
+    .dropdown-content {
+        display: none; position: absolute; left: 0; 
+        background: white; min-width: 220px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        z-index: 1000; border-radius: 8px; overflow: hidden;
+        margin-top: 10px;
+    }
+    .dropdown-content a {
+        color: #333; padding: 12px 20px; text-decoration: none;
+        display: block; border-bottom: 1px solid #eee; text-transform: none;
+    }
+    .dropdown-content a:hover { background: #F2E8CF; }
+    
+    .dropdown:hover .dropdown-content,
+    .dropdown.active .dropdown-content { display: block; }
 
-        .btn-carrito-nav {
-            background: #e67e22; color: white; border: none;
-            padding: 10px 20px; border-radius: 50px;
-            cursor: pointer; font-weight: bold; transition: 0.3s;
-        }
+    .btn-carrito-nav {
+        background: #e67e22; color: white; border: none;
+        padding: 10px 20px; border-radius: 50px;
+        cursor: pointer; font-weight: bold; transition: 0.3s;
+    }
 
-        /* --- PRODUCTOS --- */
-        .seccion-titulo { text-align: center; padding: 40px 0 20px; font-size: 2.2rem; color: #2E8B57; text-transform: uppercase; }
-        .container { 
-            max-width: 1200px; margin: auto; padding: 20px; 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; 
-        }
-        .producto { 
-            background: white; padding: 25px; border-radius: 20px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;
-            position: relative;
-        }
-        .producto:hover { transform: translateY(-10px); }
-        .producto img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
-        
-        /* Estilos Oferta */
-        .badge-oferta {
-            position: absolute; top: 15px; left: 15px;
-            background: #e67e22; color: white; padding: 5px 15px;
-            border-radius: 50px; font-weight: 900; font-size: 0.8rem;
-            z-index: 10;
-        }
-        .precio-antes {
-            text-decoration: line-through; color: #999;
-            font-size: 1rem; margin-right: 10px; font-weight: bold;
-        }
+    /* --- PRODUCTOS --- */
+    .seccion-titulo { text-align: center; padding: 40px 0 20px; font-size: 2.2rem; color: #2E8B57; text-transform: uppercase; }
+    .container { 
+        max-width: 1200px; margin: auto; padding: 20px; 
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; 
+    }
+    .producto { 
+        background: white; padding: 25px; border-radius: 20px; 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;
+        position: relative;
+    }
+    .producto:hover { transform: translateY(-10px); }
+    .producto img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+    
+    /* Estilos Oferta */
+    .badge-oferta {
+        position: absolute; top: 15px; left: 15px;
+        background: #e67e22; color: white; padding: 5px 15px;
+        border-radius: 50px; font-weight: 900; font-size: 0.8rem;
+        z-index: 10;
+    }
+    .precio-antes {
+        text-decoration: line-through; color: #999;
+        font-size: 1rem; margin-right: 10px; font-weight: bold;
+    }
 
-        .select-talle {
-            width: 100%; padding: 12px; margin: 15px 0;
-            border-radius: 10px; border: 2px solid #2E8B57;
-            font-weight: bold; cursor: pointer; background-color: #fff;
-            font-family: 'Roboto', sans-serif;
-        }
+    .select-talle {
+        width: 100%; padding: 12px; margin: 15px 0;
+        border-radius: 10px; border: 2px solid #2E8B57;
+        font-weight: bold; cursor: pointer; background-color: #fff;
+        font-family: 'Roboto', sans-serif;
+    }
 
-        .btn-accion {
-            padding: 15px; border-radius: 10px; cursor: pointer;
-            width: 100%; font-weight: bold; text-transform: uppercase;
-            border: none; transition: 0.3s; margin-bottom: 10px;
-            font-size: 0.85rem; letter-spacing: 1px;
-        }
-        .btn-ver-producto { background: #1E5D3D; color: white; }
-        .btn-ver-producto:hover { background: #2E8B57; }
-        .btn-agregar-carrito { background: #333; color: white; }
-        .btn-agregar-carrito:hover { background: #000; }
+    .btn-accion {
+        padding: 15px; border-radius: 10px; cursor: pointer;
+        width: 100%; font-weight: bold; text-transform: uppercase;
+        border: none; transition: 0.3s; margin-bottom: 10px;
+        font-size: 0.85rem; letter-spacing: 1px;
+    }
+    .btn-ver-producto { background: #1E5D3D; color: white; }
+    .btn-ver-producto:hover { background: #2E8B57; }
+    .btn-agregar-carrito { background: #333; color: white; }
+    .btn-agregar-carrito:hover { background: #000; }
 
-        /* --- MODAL --- */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
-            width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);
-        }
-        .modal-content {
-            background-color: white; margin: 5% auto; padding: 25px;
-            border-radius: 15px; width: 90%; max-width: 450px; text-align: center; position: relative;
-        }
-        .cerrar-modal { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
-        .modal-img { width: 100%; border-radius: 10px; margin: 15px 0; }
+    /* --- MODAL --- */
+    .modal {
+        display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+        width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);
+    }
+    .modal-content {
+        background-color: white; margin: 5% auto; padding: 25px;
+        border-radius: 15px; width: 90%; max-width: 450px; text-align: center; position: relative;
+    }
+    .cerrar-modal { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
+    .modal-img { width: 100%; border-radius: 10px; margin: 15px 0; }
 
-        footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: 50px; }
-    </style>
+    footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: 50px; }
+</style>
 </head>
 <body>
 
@@ -189,6 +188,8 @@
 
 <script>
     const productos = [
+        { id: 32, nombre: "Camiseta Importada Liverpool Retro 93/95", precio: 50000, img: "liverpool-retro.jpg", stock: { S: false, M: false, L: false, XL: true, XXL: false } },
+        { id: 33, nombre: "Camiseta V. Fan Boca Juniors 3era", precio: 40000, img: "boca-3ra.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 1, nombre: "Camiseta V. Jugador Argentina Titular 2026", precio: 50000, img: "camiseta-seleccion.jpg", stock: { S: false, M: true, L: true, XL: true, XXL: false } },
         { id: 2, nombre: "Camiseta V. Jugador River Plate 2026", precio: 50000, img: "river-titular-2026.jpg", stock: { S: true, M: false, L: false, XL: false, XXL: false } },
         { id: 3, nombre: "Camiseta V. Fan Boca Jrs. 2026", precio: 40000, img: "boca-titular-2026.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
@@ -242,17 +243,18 @@
                 ? `<p style="color:#2E8B57; font-size:1.5rem; font-weight:900"><span class="precio-antes">$${p.precioAnterior.toLocaleString()}</span>$${p.precio.toLocaleString()}</p>`
                 : `<p style="color:#2E8B57; font-size:1.5rem; font-weight:900">$${p.precio.toLocaleString()}</p>`;
 
-            let opcionesTalles = `<option value="">Elegir Talle</option>`;
+            let opcionesTalles = `<select class="select-talle" id="talle-${p.id}"><option value="">Elegir Talle</option>`;
             for (const [talle, disponible] of Object.entries(p.stock)) {
                 opcionesTalles += `<option value="${talle}" ${disponible ? '' : 'disabled'}>${talle} ${disponible ? '' : '(Agotado)'}</option>`;
             }
+            opcionesTalles += `</select>`;
 
             div.innerHTML = `
                 ${badge}
                 <img src="${p.img}" alt="${p.nombre}">
                 <h3>${p.nombre}</h3>
                 ${precioHTML}
-                <select class="select-talle" id="talle-${p.id}">${opcionesTalles}</select>
+                ${opcionesTalles}
                 <button class="btn-accion btn-ver-producto" onclick="verProducto('${p.nombre}', ${p.precio}, '${p.img}')">Ver Producto</button>
                 <button class="btn-accion btn-agregar-carrito" onclick="agregarAlCarrito(${p.id})">Añadir al Carrito</button>
             `;
