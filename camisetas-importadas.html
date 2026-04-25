@@ -188,10 +188,10 @@
 
 <script>
     const productos = [
-        { id: 32, nombre: "Camiseta Importada Liverpool Retro 93/95", precio: 50000, img: "liverpool-retro.jpg", stock: { S: false, M: false, L: false, XL: true, XXL: false } },
+        { id: 32, nombre: "Camiseta Importada Liverpool Retro 93/95", precio: 50000, img: "liverpool-retro.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 33, nombre: "Camiseta V. Fan Boca Juniors 3era", precio: 40000, img: "boca-3ra.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 1, nombre: "Camiseta V. Jugador Argentina Titular 2026", precio: 50000, img: "camiseta-seleccion.jpg", stock: { S: false, M: true, L: true, XL: true, XXL: false } },
-        { id: 2, nombre: "Camiseta V. Jugador River Plate 2026", precio: 50000, img: "river-titular-2026.jpg", stock: { S: true, M: false, L: false, XL: false, XXL: false } },
+        { id: 2, nombre: "Camiseta V. Jugador River Plate 2026", precio: 50000, img: "river-titular-2026.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 3, nombre: "Camiseta V. Fan Boca Jrs. 2026", precio: 40000, img: "boca-titular-2026.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 4, nombre: "Camiseta V. Jugador Real Madrid Titular 2026", precio: 50000, img: "real-madrid-titular-2026.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 5, nombre: "Camiseta V. Jugador Barcelona Titular 2026", precio: 50000, img: "barcelona-titular-2026.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
@@ -207,17 +207,17 @@
         { id: 15, nombre: "Camiseta V. Jugador Barca Alt. 2025 (Cactus Jack)", precio: 50000, img: "barca-cactus-jack.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 16, nombre: "Camiseta V. Jugador Chelsea Titular 2026", precio: 50000, img: "chelsea-titular-2026.jpg", stock: { S: false, M: true, L: true, XL: false, XXL: false } },
         { id: 17, nombre: "Camiseta V. Jugador Chelsea Total 90 2026", precio: 50000, img: "chelsea-total90-2026.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
-        { id: 18, nombre: "Camiseta V. Jugador Chelsea Alt. 2026", precio: 50000, img: "chelsea-alt-2026.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
+        { id: 18, nombre: "Camiseta V. Jugador Chelsea Alt. 2026", precio: 50000, img: "chelsea-alt-2026.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 19, nombre: "Camiseta V. Jugador Inter de Milan Titular 2026", precio: 50000, img: "inter-titular-2026.jpg", stock: { S: false, M: true, L: false, XL: false, XXL: false } },
         { id: 20, nombre: "Camiseta V. Jugador Milan Titular 2007", precio: 50000, img: "milan-titular-2007.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 21, nombre: "Camiseta V. Jugador Milan Alt. 2007", precio: 50000, img: "milan-alt-2007.jpg", stock: { S: false, M: true, L: false, XL: true, XXL: false } },
         { id: 22, nombre: "Camiseta V. Jugador Manchester Udt. 2008", precio: 50000, img: "manchester-2008.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 23, nombre: "Camiseta V. Jugador Real Madrid Titular 2009", precio: 50000, img: "real-madrid-2009.jpg", stock: { S: false, M: true, L: false, XL: false, XXL: false } },
         { id: 24, nombre: "Camiseta V. Jugador Barcelona Titular 2015", precio: 50000, img: "barcelona-titular-2015.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
-        { id: 25, nombre: "Camiseta V. Fan Barcelona 3ra 2025", precio: 40000, img: "barcelona-3ra-2025.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
+        { id: 25, nombre: "Camiseta V. Fan Barcelona 3ra 2025", precio: 40000, img: "barcelona-3ra-2025.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 26, nombre: "Camiseta V. Fan Santos Alt. 2026", precio: 40000, img: "santos-alt-2026.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 27, nombre: "Camiseta V. Fan Inter de Porto Alegre Titular 2025", precio: 40000, img: "inter-porto-titular-2025.jpg", stock: { S: false, M: true, L: false, XL: false, XXL: false } },
-        { id: 28, nombre: "Camiseta V. Fan Holanda Alt. 2026", precio: 40000, img: "holanda-alt-2026.jpg", stock: { S: true, M: true, L: true, XL: true, XXL: true } },
+        { id: 28, nombre: "Camiseta V. Fan Holanda Alt. 2026", precio: 40000, img: "holanda-alt-2026.jpg", stock: { S: true, M: false, L: true, XL: false, XXL: false } },
         { id: 29, nombre: "Camiseta V. Fan Boca Juniors Alt. 2026", precio: 40000, img: "boca-alt-2026.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 30, nombre: "Camiseta V. Fan River Plate Alt. 2026", precio: 40000, img: "river-alt-2026.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 31, nombre: "Camiseta V. Fan Flamengo Alt. 2024", precio: 30000, precioAnterior: 40000, oferta: true, img: "flamengo-2024.jpg", stock: { S: true, M: false, L: false, XL: false, XXL: false } }
