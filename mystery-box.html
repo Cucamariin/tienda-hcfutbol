@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Box Personalizada | HC Futbol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            background-color: #F2E8CF; 
+            background-image: 
+                radial-gradient(#d9cea9 2px, transparent 2px), 
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='30' font-family='Arial' font-size='25' fill='%23d9cea9' fill-opacity='0.8'%3E?%3C/text%3E%3Ctext x='50' y='70' font-family='Arial' font-size='20' fill='%23d9cea9' fill-opacity='0.8'%3E⚽%3C/text%3E%3Ctext x='80' y='30' font-family='Arial' font-size='20' fill='%23d9cea9' fill-opacity='0.8'%3E👕%3C/text%3E%3C/svg%3E");
+            background-size: 100px 100px;
+            animation: backgroundMove 30s linear infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes backgroundMove { from { background-position: 0 0; } to { background-position: 500px 500px; } }
+
+        header { 
+            background: #2E8B57; color: white; padding: 15px 5%; 
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;
+        }
+        header a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+
+        .mystery-container {
+            max-width: 500px; margin: 30px auto; background: rgba(255, 255, 255, 0.98); 
+            padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 3px solid #2E8B57;
+        }
+
+        .mode-selector {
+            display: flex; background: #eee; border-radius: 50px; margin-bottom: 25px; padding: 5px;
+        }
+        .mode-btn {
+            flex: 1; border: none; padding: 12px; border-radius: 50px; cursor: pointer;
+            font-weight: bold; transition: 0.3s; font-family: 'Roboto', sans-serif;
+        }
+        .mode-btn.active { background: #2E8B57; color: white; }
+
+        .form-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #2E8B57; text-transform: uppercase; font-size: 0.75rem; }
+        
+        select, input, textarea {
+            width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 12px;
+            font-family: 'Roboto', sans-serif; font-size: 1rem; box-sizing: border-box;
+        }
+
+        /* Área para Amigo Invisible */
+        #modo-amigo { display: none; }
+        textarea { height: 100px; resize: none; font-size: 0.9rem; }
+
+        .price-display {
+            background: #2E8B57; color: white; padding: 20px; border-radius: 20px; margin: 20px 0; text-align: center;
+        }
+        .price-display span { font-size: 2.5rem; font-weight: 900; }
+
+        .btn-comprar {
+            background: #e67e22; color: white; border: none; padding: 20px; border-radius: 50px;
+            font-weight: 900; text-transform: uppercase; cursor: pointer; width: 100%; font-size: 1.1rem;
+            transition: 0.3s; box-shadow: 0 10px 20px rgba(230, 126, 34, 0.4);
+        }
+        .btn-comprar:hover { background: #d35400; transform: scale(1.02); }
+
+        .info-box {
+            background: #fff3cd; color: #856404; padding: 10px; border-radius: 10px; 
+            font-size: 0.8rem; margin-bottom: 15px; border-left: 5px solid #ffeeba;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html">← Volver</a>
+    <div style="font-weight: 900;">HC FUTBOL</div>
+</header>
+
+<div class="mystery-container">
+    <h2 style="color:#2E8B57; text-align:center; margin-top:0;">🎁 Mystery Box</h2>
+    
+    <!-- Selector de Modo -->
+    <div class="mode-selector">
+        <button class="mode-btn active" id="btn-mi" onclick="cambiarModo('mi')">Para mí</button>
+        <button class="mode-btn" id="btn-amigo" onclick="cambiarModo('amigo')">Amigo Invisible</button>
+    </div>
+
+    <!-- CALIDAD (Común a ambos) -->
+    <div class="form-group">
+        <label>Calidad de las camisetas</label>
+        <select id="calidad" onchange="actualizarPrecio()">
+            <option value="nacional" data-unitario="22000">Nacional - $22.000 c/u</option>
+            <option value="importada" data-unitario="47000">Importada - $47.000 c/u</option>
+        </select>
+    </div>
+
+    <!-- CANTIDAD (Común a ambos) -->
+    <div class="form-group">
+        <label>¿Cuántas camisetas?</label>
+        <select id="cantidad" onchange="actualizarPrecio()">
+            <option value="1">1 Unidad</option>
+            <option value="2">2 Unidades</option>
+            <option value="3">3 Unidades</option>
+            <option value="4">4 Unidades</option>
+            <option value="5">5 Unidades</option>
+        </select>
+    </div>
+
+    <!-- MODO PARA MÍ -->
+    <div id="modo-mi">
+        <div class="form-group">
+            <label>Tu Talle</label>
+            <select id="talle-mi">
+                <option value="S">S</option><option value="M">M</option><option value="L">L</option>
+                <option value="XL">XL</option><option value="XXL">XXL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Equipo que NO querés</label>
+            <input type="text" id="anular-mi" placeholder="Ej: No quiero de Boca">
+        </div>
+    </div>
+
+    <!-- MODO AMIGO INVISIBLE -->
+    <div id="modo-amigo">
+        <div class="info-box">
+            Ideal si comprás con amigos. Detallanos talle y equipo a evitar de cada uno.
+        </div>
+        <div class="form-group">
+            <label>Detalle de los integrantes</label>
+            <textarea id="detalle-amigo" placeholder="Ej:&#10;1. Talle L - No River&#10;2. Talle S - No Racing&#10;3. Talle XL - No Real Madrid"></textarea>
+        </div>
+    </div>
+
+    <div class="price-display">
+        <p style="margin:0; font-size: 0.8rem; opacity: 0.8;">TOTAL ESTIMADO</p>
+        <span id="precio-final">$22.000</span>
+    </div>
+
+    <button class="btn-comprar" onclick="pedirMysteryBox()">Pedir por WhatsApp</button>
+</div>
+
+<script>
+    let modoActual = 'mi';
+
+    function cambiarModo(modo) {
+        modoActual = modo;
+        document.getElementById('modo-mi').style.display = modo === 'mi' ? 'block' : 'none';
+        document.getElementById('modo-amigo').style.display = modo === 'amigo' ? 'block' : 'none';
+        
+        document.getElementById('btn-mi').classList.toggle('active', modo === 'mi');
+        document.getElementById('btn-amigo').classList.toggle('active', modo === 'amigo');
+    }
+
+    function actualizarPrecio() {
+        const selectCalidad = document.getElementById('calidad');
+        const precioUnitario = selectCalidad.options[selectCalidad.selectedIndex].getAttribute('data-unitario');
+        const cantidad = document.getElementById('cantidad').value;
+        const total = parseInt(precioUnitario) * parseInt(cantidad);
+        document.getElementById('precio-final').innerText = "$" + total.toLocaleString();
+    }
+
+    function pedirMysteryBox() {
+        const calidad = document.getElementById('calidad').options[document.getElementById('calidad').selectedIndex].text.split(' -')[0];
+        const cantidad = document.getElementById('cantidad').value;
+        const precio = document.getElementById('precio-final').innerText;
+        
+        let infoPersonalizada = "";
+
+        if(modoActual === 'mi') {
+            const talle = document.getElementById('talle-mi').value;
+            const anular = document.getElementById('anular-mi').value || "Ninguno";
+            infoPersonalizada = `📏 *Talle:* ${talle}%0A❌ *Evitar:* ${anular}`;
+        } else {
+            const detalle = document.getElementById('detalle-amigo').value || "No especificado";
+            infoPersonalizada = `👥 *Detalle Amigo Invisible:*%0A${encodeURIComponent(detalle)}`;
+        }
+
+        const mensaje = `¡Hola HC Futbol! Quiero una *Mystery Box* (${modoActual === 'mi' ? 'Personal' : 'Amigo Invisible'}):%0A%0A` +
+                        `✨ *Calidad:* ${calidad}%0A` +
+                        `📦 *Cantidad:* ${cantidad}%0A` +
+                        `${infoPersonalizada}%0A%0A` +
+                        `💰 *TOTAL:* ${precio}%0A` +
+                        `¿Cómo coordinamos?`;
+
+        window.open(`https://wa.me/543584237914?text=${mensaje}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
