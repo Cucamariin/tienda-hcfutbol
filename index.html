@@ -53,6 +53,19 @@
         }
         .main-nav a:hover { color: #F2E8CF; }
 
+        /* Estilo especial para Mystery Box */
+        .mystery-link {
+            color: #FFD700 !important; /* Color dorado */
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+            100% { transform: scale(1); }
+        }
+
         .dropdown { position: relative; display: inline-block; }
         .dropbtn { 
             background: transparent; color: white; border: none; 
@@ -145,6 +158,8 @@
         @media (max-width: 768px) {
             .hero { aspect-ratio: 16 / 9; }
             .top-bar-logo h1 { font-size: 1.5rem; }
+            .main-nav { gap: 10px; }
+            .main-nav a { font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -170,12 +185,15 @@
             </div>
         </div>
         <a href="ofertas.html">Ofertas</a>
+        <!-- NUEVA SECCIÓN AGREGADA AQUÍ -->
+        <a href="mystery-box.html" class="mystery-link">Mystery Box 🎁</a>
     </nav>
     <button class="btn-carrito-nav" onclick="enviarPedido()">
         🛒 Carrito (<span id="contador-carrito">0</span>)
     </button>
 </header>
 
+<!-- El resto del contenido permanece igual -->
 <section class="hero">
     <a href="#productos" class="btn-explorar-hero">Ver Catálogo</a>
 </section>
@@ -183,7 +201,7 @@
 <h2 class="seccion-titulo" id="productos">🔥 Destacados</h2>
 
 <div class="container" id="lista-productos">
-    </div>
+</div>
 
 <div id="miModal" class="modal">
     <div class="modal-content">
@@ -334,7 +352,6 @@
         }
     }
 
-    // Al cargar la página, recuperar carrito y mostrar productos
     window.onload = function() {
         const carritoGuardado = localStorage.getItem('carrito');
         if (carritoGuardado) {
