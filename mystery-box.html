@@ -50,7 +50,6 @@
             font-family: 'Roboto', sans-serif; font-size: 1rem; box-sizing: border-box;
         }
 
-        /* Área para Amigo Invisible */
         #modo-amigo { display: none; }
         textarea { height: 100px; resize: none; font-size: 0.9rem; }
 
@@ -82,34 +81,25 @@
 <div class="mystery-container">
     <h2 style="color:#2E8B57; text-align:center; margin-top:0;">🎁 Mystery Box</h2>
     
-    <!-- Selector de Modo -->
     <div class="mode-selector">
         <button class="mode-btn active" id="btn-mi" onclick="cambiarModo('mi')">Para mí</button>
         <button class="mode-btn" id="btn-amigo" onclick="cambiarModo('amigo')">Amigo Invisible</button>
     </div>
 
-    <!-- CALIDAD (Común a ambos) -->
     <div class="form-group">
         <label>Calidad de las camisetas</label>
-        <select id="calidad" onchange="actualizarPrecio()">
-            <option value="nacional" data-unitario="22000">Nacional - $22.000 c/u</option>
-            <option value="importada" data-unitario="47000">Importada - $47.000 c/u</option>
+        <select id="calidad" onchange="actualizarOpcionesCantidad()">
+            <option value="nacional">Nacional</option>
+            <option value="importada">Importada</option>
         </select>
     </div>
 
-    <!-- CANTIDAD (Común a ambos) -->
     <div class="form-group">
         <label>¿Cuántas camisetas?</label>
         <select id="cantidad" onchange="actualizarPrecio()">
-            <option value="1">1 Unidad</option>
-            <option value="2">2 Unidades</option>
-            <option value="3">3 Unidades</option>
-            <option value="4">4 Unidades</option>
-            <option value="5">5 Unidades</option>
-        </select>
+            </select>
     </div>
 
-    <!-- MODO PARA MÍ -->
     <div id="modo-mi">
         <div class="form-group">
             <label>Tu Talle</label>
@@ -124,7 +114,6 @@
         </div>
     </div>
 
-    <!-- MODO AMIGO INVISIBLE -->
     <div id="modo-amigo">
         <div class="info-box">
             Ideal si comprás con amigos. Detallanos talle y equipo a evitar de cada uno.
@@ -137,7 +126,7 @@
 
     <div class="price-display">
         <p style="margin:0; font-size: 0.8rem; opacity: 0.8;">TOTAL ESTIMADO</p>
-        <span id="precio-final">$22.000</span>
+        <span id="precio-final">$0</span>
     </div>
 
     <button class="btn-comprar" onclick="pedirMysteryBox()">Pedir por WhatsApp</button>
@@ -155,16 +144,57 @@
         document.getElementById('btn-amigo').classList.toggle('active', modo === 'amigo');
     }
 
+    function actualizarOpcionesCantidad() {
+        const calidad = document.getElementById('calidad').value;
+        const selectCantidad = document.getElementById('cantidad');
+        const valorAnterior = selectCantidad.value || "1";
+        
+        selectCantidad.innerHTML = "";
+
+        for (let i = 1; i <= 10; i++) {
+            let precioU = 0;
+            if (calidad === 'nacional') {
+                if (i >= 10) precioU = 18000;
+                else if (i >= 5) precioU = 20000;
+                else precioU = 22000;
+            } else {
+                if (i >= 10) precioU = 35000;
+                else if (i >= 5) precioU = 42000;
+                else precioU = 47000;
+            }
+
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.innerText = `${i} ${i === 1 ? 'Unidad' : 'Unidades'} ($${precioU.toLocaleString()} c/u)`;
+            selectCantidad.appendChild(opt);
+        }
+        
+        selectCantidad.value = valorAnterior;
+        actualizarPrecio();
+    }
+
     function actualizarPrecio() {
-        const selectCalidad = document.getElementById('calidad');
-        const precioUnitario = selectCalidad.options[selectCalidad.selectedIndex].getAttribute('data-unitario');
-        const cantidad = document.getElementById('cantidad').value;
-        const total = parseInt(precioUnitario) * parseInt(cantidad);
+        const calidad = document.getElementById('calidad').value;
+        const cantidad = parseInt(document.getElementById('cantidad').value);
+        let precioUnitario = 0;
+
+        if (calidad === 'nacional') {
+            if (cantidad >= 10) precioUnitario = 18000;
+            else if (cantidad >= 5) precioUnitario = 20000;
+            else precioUnitario = 22000;
+        } else {
+            if (cantidad >= 10) precioUnitario = 35000;
+            else if (cantidad >= 5) precioUnitario = 42000;
+            else precioUnitario = 47000;
+        }
+
+        const total = precioUnitario * cantidad;
         document.getElementById('precio-final').innerText = "$" + total.toLocaleString();
     }
 
     function pedirMysteryBox() {
-        const calidad = document.getElementById('calidad').options[document.getElementById('calidad').selectedIndex].text.split(' -')[0];
+        const calidadSelect = document.getElementById('calidad');
+        const calidad = calidadSelect.options[calidadSelect.selectedIndex].text;
         const cantidad = document.getElementById('cantidad').value;
         const precio = document.getElementById('precio-final').innerText;
         
@@ -188,6 +218,8 @@
 
         window.open(`https://wa.me/543584237914?text=${mensaje}`, '_blank');
     }
+
+    window.onload = actualizarOpcionesCantidad;
 </script>
 
 </body>
