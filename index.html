@@ -276,7 +276,15 @@
         const contenedor = document.getElementById('lista-productos');
         if(!contenedor) return;
         contenedor.innerHTML = '';
-        productos.forEach(p => {
+
+        // Copiar y ordenar el array: los que tienen stock van primero, los agotados al final
+        const productosOrdenados = [...productos].sort((a, b) => {
+            const tieneStockA = Object.values(a.stock).some(disponible => disponible === true);
+            const tieneStockB = Object.values(b.stock).some(disponible => disponible === true);
+            return (tieneStockB ? 1 : 0) - (tieneStockA ? 1 : 0);
+        });
+
+        productosOrdenados.forEach(p => {
             const div = document.createElement('div');
             div.className = 'producto';
             let opcionesTalles = `<option value="">Elegir Talle</option>`;
