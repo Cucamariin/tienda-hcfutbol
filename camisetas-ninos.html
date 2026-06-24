@@ -173,7 +173,7 @@
 
 <script>
     const productos = [
-        { id: 401, nombre: "Camiseta Niño River Plate Titular 2026", precio: 20000, img: "nino-river-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:true, 16:false } },
+        { id: 401, nombre: "Camiseta Niño River Plate Titular 2026", precio: 20000, img: "nino-river-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:false, 16:false } },
         { id: 402, nombre: "Camiseta Niño River Plate Alt. 2026", precio: 20000, img: "nino-river-alt.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:true, 14:true, 16:false } },
         { id: 403, nombre: "Camiseta Niño Boca Juniors Titular 2026", precio: 20000, img: "nino-boca-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:true, 14:true, 16:true } },
         { id: 404, nombre: "Camiseta Niño Boca Juniors Alt. 2026", precio: 20000, img: "nino-boca-alt.jpg", stock: { 4:false, 6:true, 8:true, 10:true, 12:true, 14:false, 16:true } },
@@ -181,12 +181,12 @@
         { id: 406, nombre: "Camiseta Niño Argentina Titular 2026", precio: 20000, img: "nino-argentina-titular.jpg", stock: { 4:false, 6:true, 8:false, 10:true, 12:true, 14:true, 16:true } },
         { id: 407, nombre: "Camiseta Niño Argentina Arquero 2026", precio: 20000, img: "nino-argentina-arquero.jpg", stock: { 4:false, 6:false, 8:false, 10:true, 12:true, 14:false, 16:false } },
         { id: 408, nombre: "Camiseta Niño Real Madrid Titular 2026", precio: 20000, img: "nino-real-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:true, 16:false } },
-        { id: 409, nombre: "Camiseta Niño Barcelona Titular 2026", precio: 20000, img: "nino-barca-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:true, 14:true, 16:false } },
-        { id: 410, nombre: "Camiseta Niño Liverpool Titular 2026", precio: 20000, img: "nino-liverpool-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:true, 14:false, 16:false } },
+        { id: 409, nombre: "Camiseta Niño Barcelona Titular 2026", precio: 20000, img: "nino-barca-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:false, 16:false } },
+        { id: 410, nombre: "Camiseta Niño Liverpool Titular 2026", precio: 20000, img: "nino-liverpool-titular.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:false, 16:false } },
         { id: 411, nombre: "Camiseta Niño Liverpool Alt. 2026", precio: 20000, img: "nino-liverpool-alt.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:false, 16:true } },
         { id: 412, nombre: "Camiseta Niño Inter de Miami Alt. 2026", precio: 20000, img: "nino-miami-2026.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:true, 14:false, 16:false } },
         { id: 413, nombre: "Camiseta Niño Inter de Miami Alt. 2025", precio: 20000, img: "nino-miami-2025.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:false, 16:true } },
-        { id: 414, nombre: "Camiseta Niño Chelsea Total 90 2026", precio: 20000, img: "nino-chelsea-t90.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:true, 16:false } },
+        { id: 414, nombre: "Camiseta Niño Chelsea Total 90 2026", precio: 20000, img: "nino-chelsea-t90.jpg", stock: { 4:false, 6:false, 8:false, 10:false, 12:false, 14:false, 16:false } },
         { id: 415, nombre: "Mulsculosa Niño River Plate Negra 2026", precio: 20000, img: "nino-river-negra-2026.jpg", stock: { 4:false, 6:false, 8:false, 10:true, 12:false, 14:false, 16:false } }
     ];
 
@@ -200,8 +200,17 @@
 
     function cargarProductos() {
         const contenedor = document.getElementById('lista-productos');
+        if(!contenedor) return;
         contenedor.innerHTML = '';
-        productos.forEach(p => {
+        
+        // Ordenar el catálogo para enviar los productos sin stock al final
+        const productosOrdenados = [...productos].sort((a, b) => {
+            const tieneStockA = Object.values(a.stock).some(disponible => disponible === true);
+            const tieneStockB = Object.values(b.stock).some(disponible => disponible === true);
+            return (tieneStockB ? 1 : 0) - (tieneStockA ? 1 : 0);
+        });
+
+        productosOrdenados.forEach(p => {
             const div = document.createElement('div');
             div.className = 'producto';
             let opcionesTalles = `<option value="">Elegir Talle</option>`;
