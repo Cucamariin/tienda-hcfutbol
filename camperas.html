@@ -184,11 +184,11 @@
 
 <script>
     const productos = [
-        { id: 601, nombre: "Campera Adulto Boca Jrs Amarilla", precio: 25000, img: "campera-boca-amarilla.jpg", oferta: true, stock: { S:false, M:true, L:true, XL:false, XXL:false } },
-        { id: 602, nombre: "Campera Adulto Inter de Miami Blanca", precio: 32000, img: "campera-miami-blanca.jpg", oferta: true, stock: { S:false, M:false, L:false, XL:false, XXL:true } },
+        { id: 601, nombre: "Campera Adulto Boca Jrs Amarilla", precio: 25000, img: "campera-boca-amarilla.jpg", oferta: true, stock: { S:false, M:false, L:false, XL:false, XXL:false } },
+        { id: 602, nombre: "Campera Adulto Inter de Miami Blanca", precio: 32000, img: "campera-miami-blanca.jpg", oferta: true, stock: { S:false, M:false, L:false, XL:false, XXL:false } },
         { id: 603, nombre: "Campera Adulto Inter de Miami Manga Gris", precio: 32000, img: "campera-miami-gris.jpg", oferta: true, stock: { S:false, M:true, L:false, XL:false, XXL:false } },
-        { id: 604, nombre: "Campera Adulto Inter de Miami Negra", precio: 32000, img: "campera-miami-negra.jpg", oferta: true, stock: { S:false, M:false, L:false, XL:true, XXL:false } },
-        { id: 605, nombre: "Campera Adulto AFA Negra 2025", precio: 40000, img: "campera-afa-negra.jpg", oferta: false, stock: { S:false, M:true, L:true, XL:false, XXL:false } },
+        { id: 604, nombre: "Campera Adulto Inter de Miami Negra", precio: 32000, img: "campera-miami-negra.jpg", oferta: true, stock: { S:false, M:false, L:false, XL:false, XXL:false } },
+        { id: 605, nombre: "Campera Adulto AFA Negra 2025", precio: 40000, img: "campera-afa-negra.jpg", oferta: false, stock: { S:false, M:true, L:false, XL:false, XXL:false } },
         { id: 606, nombre: "Campera Rompe Viento River Plate", precio: 20000, img: "rompeviento-river.jpg", oferta: true, stock: { S:true, M:true, L:true, XL:false, XXL:false } }
     ];
 
@@ -203,7 +203,15 @@
     function cargarProductos() {
         const contenedor = document.getElementById('lista-productos');
         contenedor.innerHTML = '';
-        productos.forEach(p => {
+        
+        // Ordenar el catálogo para enviar los productos sin stock al final
+        const productosOrdenados = [...productos].sort((a, b) => {
+            const tieneStockA = Object.values(a.stock).some(disponible => disponible === true);
+            const tieneStockB = Object.values(b.stock).some(disponible => disponible === true);
+            return (tieneStockB ? 1 : 0) - (tieneStockA ? 1 : 0);
+        });
+
+        productosOrdenados.forEach(p => {
             const div = document.createElement('div');
             div.className = 'producto';
             
