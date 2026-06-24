@@ -191,7 +191,15 @@
     function cargarProductos() {
         const contenedor = document.getElementById('lista-productos');
         contenedor.innerHTML = '';
-        productos.forEach(p => {
+        
+        // Ordenar: productos con stock primero
+        const productosOrdenados = [...productos].sort((a, b) => {
+            const tieneStockA = Object.values(a.stock).some(d => d === true);
+            const tieneStockB = Object.values(b.stock).some(d => d === true);
+            return (tieneStockB ? 1 : 0) - (tieneStockA ? 1 : 0);
+        });
+
+        productosOrdenados.forEach(p => {
             const div = document.createElement('div');
             div.className = 'producto';
             let opcionesTalles = `<option value="">Elegir Talle</option>`;
@@ -245,7 +253,6 @@
         });
         msj += `%0A*TOTAL A PAGAR: $${total.toLocaleString()}*`;
 
-        // Limpiar tras el pedido
         localStorage.removeItem('carrito');
         carrito = [];
         actualizarContador();
@@ -261,7 +268,6 @@
         }
     }
 
-    // Cargar carrito existente al abrir la página
     window.onload = function() {
         const carritoGuardado = localStorage.getItem('carrito');
         if (carritoGuardado) {
