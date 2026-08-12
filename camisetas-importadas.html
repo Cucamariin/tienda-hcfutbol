@@ -188,7 +188,19 @@
 
 <script>
     const productos = [
-        // NUEVOS PRODUCTOS AGREGADOS COLOCADOS EN PRIMER LUGAR
+        // NUEVOS PRODUCTOS SOLICITADOS
+        { id: 50, nombre: "Camiseta V. Fan Real Madrid Titular 26/27", precio: 50000, img: "real-madrid-titular-26-27.jpg", stock: { S: false, M: true, L: true, XL: false, XXL: false } },
+        { id: 51, nombre: "Camiseta V. Jugador Boca Juniors 25 Aniversario Copa 2001", precio: 50000, img: "boca-25-aniversario-2001.jpg", stock: { S: false, M: true, L: true, XL: false, XXL: false } },
+        { id: 52, nombre: "Camiseta V. Jugador Barcelona Titular 26/27", precio: 50000, img: "barcelona-titular-26-27.jpg", stock: { S: false, M: true, L: false, XL: true, XXL: false } },
+        { id: 53, nombre: "Camiseta V. Jugador Manchester City Titular 26/27", precio: 50000, img: "manchester-city-titular-26-27.jpg", stock: { S: false, M: true, L: true, XL: false, XXL: false } },
+        { id: 54, nombre: "Camiseta V. Jugador PSG Titular 26/27", precio: 50000, img: "psg-titular-26-27.jpg", stock: { S: true, M: false, L: false, XL: true, XXL: false } },
+        { id: 55, nombre: "Camiseta V. Jugador Juventus Titular 26/27", precio: 50000, img: "juventus-titular-26-27.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
+        { id: 56, nombre: "Camiseta V. Jugador Bayern Munich Oktoberfest", precio: 50000, img: "bayern-oktoberfest.jpg", stock: { S: false, M: true, L: false, XL: false, XXL: false } },
+        { id: 57, nombre: "Camiseta V. Jugador Santos Alternativa 26/27", precio: 50000, img: "santos-alt-26-27.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
+        { id: 58, nombre: "Camiseta Retro Importada Inter de Milan 98/99", precio: 50000, img: "inter-retro-98-99.jpg", stock: { S: false, M: true, L: false, XL: false, XXL: false } },
+        { id: 59, nombre: "Camiseta Retro Importada Colombia 98'", precio: 50000, img: "colombia-retro-98.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
+
+        // PRODUCTOS ANTERIORES
         { id: 47, nombre: "Camiseta V. Jugador Francia Alt. 2026", precio: 50000, img: "francia-alt-2026.jpg", stock: { S: false, M: false, L: false, XL: true, XXL: false } },
         { id: 48, nombre: "Camiseta Importada Retro Francia 98'", precio: 50000, img: "francia-retro-98.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 49, nombre: "Camiseta V. Jugador AFA Prematch", precio: 50000, img: "afa-prematch.jpg", stock: { S: false, M: true, L: false, XL: false, XXL: true } },
@@ -205,8 +217,6 @@
         { id: 44, nombre: "Camiseta Retro Liverpool 94' Alt.", precio: 50000, img: "liverpool-94-alt.jpg", stock: { S: false, M: false, L: true, XL: false, XXL: false } },
         { id: 45, nombre: "Camiseta Retro Mangas Largas Argentina 2006", precio: 50000, img: "argentina-2006-ml.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 46, nombre: "Camiseta Retro Mangas Largas Man. Udt. 2007 Alt.", precio: 50000, img: "manchester-2007-ml.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
-
-        // PRODUCTOS ANTERIORES
         { id: 32, nombre: "Camiseta Importada Liverpool Retro 93/95", precio: 50000, img: "liverpool-retro.jpg", stock: { S: false, M: true, L: false, XL: false, XXL: false } },
         { id: 33, nombre: "Camiseta V. Fan Boca Juniors 3era", precio: 40000, img: "boca-3ra.jpg", stock: { S: false, M: false, L: false, XL: false, XXL: false } },
         { id: 1, nombre: "Camiseta V. Jugador Argentina Titular 2026", precio: 50000, img: "camiseta-seleccion.jpg", stock: { S: true, M: false, L: true, XL: true, XXL: false } },
